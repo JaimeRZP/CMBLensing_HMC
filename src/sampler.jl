@@ -33,7 +33,7 @@ struct Sampler <: AbstractMCMC.AbstractSampler
    hamiltonian_dynamics::Function
 end
 
-function HMC(N, ϵ; kwargs...)
+function HMC(N::Int, ϵ::Float64; kwargs...)
    """HMC sampler"""
    sett = Settings(;N=N, ϵ=ϵ, kwargs...)
    hyperparameters = Hyperparameters(;kwargs...)
