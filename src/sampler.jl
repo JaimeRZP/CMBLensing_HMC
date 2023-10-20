@@ -86,8 +86,8 @@ function Init(sampler::Sampler, target::Target; kwargs...)
 end 
 
 function Step(sampler::Sampler, target::Target, state::State; kwargs...)
-    local xx, uu, ll, gg
     """One step of the Langevin-like dynamics."""
+    local xx, uu, ll, gg
     dialog = get(kwargs, :dialog, false)    
     N = sampler.hyperparameters.N 
     x, u, l, g, dE = state.x, state.u, state.l, state.g, state.dE
