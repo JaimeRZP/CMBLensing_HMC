@@ -20,7 +20,7 @@ function Leapfrog(target::Target,
     ll, gg = target.nlogp_grad_nlogp(xx)
 
     #half step in momentum
-    uu =  u .+ ((ϵ * 0.5).* (g .* sigma)) 
+    uu = uu .+ ((ϵ * 0.5).* (gg .* sigma)) 
 
     return xx, uu, ll, gg
 end
