@@ -22,5 +22,5 @@ function Leapfrog(target::Target,
     #half step in momentum
     uu =  u .+ ((ϵ * 0.5).* (g .* sigma)) 
 
-    return xx, uu, ll, gg, kinetic_change
+    return xx, uu, ll, gg
 end
