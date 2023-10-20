@@ -5,8 +5,8 @@ mutable struct Hyperparameters
 end
 
 Hyperparameters(;kwargs...) = begin
-   ϵ = get(kwargs, :eps, 0.0)
-   N = get(kwargs, :L, 0.0)
+   ϵ = get(kwargs, :ϵ, 0.25)
+   N = get(kwargs, :N, 25)
    sigma = get(kwargs, :sigma, [0.0])
    Hyperparameters(ϵ, N, sigma)
 end
@@ -20,8 +20,6 @@ end
 
 Settings(;kwargs...) = begin
     kwargs = Dict(kwargs)
-    N = get(kwargs, :N, 50)
-    ϵ = get(kwargs, :ϵ, 0.001)
     nchains = get(kwargs, :nchains, 1)
     integrator = get(kwargs, :integrator, "LF")
     Settings(N, ϵ,  nchains, integrator)
@@ -35,8 +33,8 @@ end
 
 function HMC(N::Int, ϵ::Float64; kwargs...)
    """HMC sampler"""
-   sett = Settings(;N=N, ϵ=ϵ, kwargs...)
-   hyperparameters = Hyperparameters(;kwargs...)
+   sett = Settings(;kwargs...)
+   hyperparameters = Hyperparameters(;N=N, ϵ=ϵ, kwargs...)
 
    ### integrator ###
    if sett.integrator == "LF"  # leapfrog
@@ -93,7 +91,7 @@ function Step(sampler::Sampler, target::Target, state::State; kwargs...)
     """One step of the Langevin-like dynamics."""
     dialog = get(kwargs, :dialog, false)    
     N = sampler.hyperparameters.N 
-    x, u, l, g = state.x, state.u, state.l, state.g
+    x, u, l, g, dE = state.x, state.u, state.l, state.g, state.dE
     # Hamiltonian step#
     for i in 1:N
         xx, uu, ll, gg = sampler.hamiltonian_dynamics(sampler, target, state)
@@ -111,7 +109,7 @@ function Step(sampler::Sampler, target::Target, state::State; kwargs...)
 end
     
 function _make_sample(sampler::Sampler, target::Target, state::State)
-    return  Array([target.inv_transform(state.x)[:]; state.x[:]; sampler.hyperparameters.ϵ; state.dE; -state.l])
+    return  Array([target.inv_transform(state.x)[:]; state.x[:]; state.dE; -state.l])
 end        
     
 
