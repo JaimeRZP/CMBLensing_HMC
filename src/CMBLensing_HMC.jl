@@ -5,7 +5,7 @@ using AbstractMCMC, Adapt, CMBLensing, Distributed, Distributions,
     DocStringExtensions, ForwardDiff, HDF5, Interpolations, LinearAlgebra, 
     MCMCDiagnosticTools, Markdown, ProgressMeter, Random, Statistics, Zygote
 
-export CMBLensingTarget, CustomTarget, Hyperparameters, Leapfrog, MCHMC, 
+export CMBLensingTarget, CustomTarget, Hyperparameters, Leapfrog, HMC, 
     Minimal_norm, ParallelTarget, Sample, Settings, StandardGaussianTarget
 
 abstract type Target end
