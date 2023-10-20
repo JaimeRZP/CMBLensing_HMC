@@ -33,9 +33,9 @@ struct Sampler <: AbstractMCMC.AbstractSampler
    hamiltonian_dynamics::Function
 end
 
-function HMC(nadapt, TEV; kwargs...)
+function HMC(N, ϵ; kwargs...)
    """HMC sampler"""
-   sett = Settings(;nadapt=nadapt, TEV=TEV, kwargs...)
+   sett = Settings(;N=N, ϵ=ϵ, kwargs...)
    hyperparameters = Hyperparameters(;kwargs...)
 
    ### integrator ###
