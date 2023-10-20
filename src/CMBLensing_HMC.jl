@@ -6,7 +6,7 @@ using AbstractMCMC, Adapt, CMBLensing, Distributed, Distributions,
     MCMCDiagnosticTools, Markdown, ProgressMeter, Random, Statistics, Zygote
 
 export CMBLensingTarget, CustomTarget, Hyperparameters, Leapfrog, HMC, 
-    Minimal_norm, ParallelTarget, Sample, Settings, StandardGaussianTarget
+    ParallelTarget, Sample, Settings, StandardGaussianTarget
 
 abstract type Target end
 

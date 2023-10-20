@@ -65,16 +65,6 @@ function Random_unit_vector(rng::MersenneTwister, d::Int; _normalize=true)
     end        
     return u
 end
-
-function Energy(target::Target,
-                x::AbstractVector, xx::AbstractVector,
-                E::Number, kinetic_change::Number)
-    l = target.nlogp(x)
-    ll = target.nlogp(xx)
-    dE = kinetic_change + ll - l
-    EE = E + dE
-    return -nllogp, EE
-end
     
 struct State
     x
