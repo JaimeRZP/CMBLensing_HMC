@@ -15,7 +15,7 @@ function Leapfrog(target::Target,
     #half step in momentum
     uu =  u .+ ((ϵ * 0.5).* (g .* sigma)) 
     #full step in x
-    zz = z .+ eps .* uu
+    zz = z .+ (ϵ .* uu)
     xx = zz .* sigma # rotate back to parameter space
     ll, gg = target.nlogp_grad_nlogp(xx)
 
