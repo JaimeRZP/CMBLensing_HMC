@@ -137,7 +137,7 @@ CMBLensingTarget(prob; rng=0, kwargs...) = begin
 
     function nlogp(xt)
         x = inv_transform(xt)
-        return -1.0 .* prob(x)
+        return 1.0 .* prob(x)
     end
 
     function grad_nlogp(xt)
