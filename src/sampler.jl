@@ -89,9 +89,9 @@ function Step(sampler::Sampler, target::Target, state::State; kwargs...)
     """One step of the Langevin-like dynamics."""
     local xx, uu, ll, gg
     dialog = get(kwargs, :dialog, false)    
-    N = sampler.hyperparameters.N 
+    N = sampler.hyperparameters.N
     x, u, l, g, dE = state.x, state.u, state.l, state.g, state.dE
-    # Hamiltonian step#
+    # Hamiltonian step
     for i in 1:N
         xx, uu, ll, gg = sampler.hamiltonian_dynamics(sampler, target, state)
     end
