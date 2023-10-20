@@ -96,7 +96,7 @@ function Step(sampler::Sampler, target::Target, state::State; kwargs...)
         xx, uu, ll, gg = sampler.hamiltonian_dynamics(sampler, target, state)
     end
     #Metropolis Adjustment
-    dEE =  (l - ll) - (dot(uu,uu) - dot(u,u))
+    dEE =  (l - ll) - (dot(uu,uu) - dot(u,u))/2
     accept = log(rand()) < dEE
     xx = @.(accept * x + (1 - accept) * xx)
     ll = @.(accept * l + (1 - accept) * ll)
