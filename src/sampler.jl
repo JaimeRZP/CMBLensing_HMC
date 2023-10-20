@@ -145,7 +145,6 @@ function Sample(sampler::Sampler, target::Target, num_steps::Int;
                 end
             end
             ProgressMeter.next!(pbar, showvalues = [
-                ("ϵ", sampler.hyperparameters.eps),
                 ("dE/d", state.dE / target.d)
             ])
         end
