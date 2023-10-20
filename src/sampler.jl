@@ -12,8 +12,6 @@ Hyperparameters(;kwargs...) = begin
 end
 
 mutable struct Settings
-    N::Int
-    ϵ::Float64
     nchains::Int
     integrator::String
 end
@@ -22,7 +20,7 @@ Settings(;kwargs...) = begin
     kwargs = Dict(kwargs)
     nchains = get(kwargs, :nchains, 1)
     integrator = get(kwargs, :integrator, "LF")
-    Settings(N, ϵ,  nchains, integrator)
+    Settings(nchains, integrator)
 end
 
 struct Sampler <: AbstractMCMC.AbstractSampler
