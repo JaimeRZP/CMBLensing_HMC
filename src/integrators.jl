@@ -11,15 +11,12 @@ function Leapfrog(target::Target,
     """leapfrog"""
     # go to the latent space
     z = x ./ sigma 
-    
-    #half step in momentum
-    uu =  u .+ ((ϵ * 0.5).* (g .* sigma)) 
     #full step in x
-    zz = z .+ (ϵ .* uu)
+    zz = z .- (ϵ .* u .- ((ϵ * 0.5).* (g .* sigma)))
     xx = zz .* sigma # rotate back to parameter space
-    ll, gg = target.nlogp_grad_nlogp(xx)
+    ll, gg = h.∂lπ∂θ(xx)
     #half step in momentum
-    uu = uu .+ ((ϵ * 0.5).* (gg .* sigma)) 
-
-    return xx, uu, ll, gg
+    uu = u .- ((ϵ * 0.5).* ((g+gg) .* sigma)) 
+    HH = ll - dot(uu,uu)/2
+    return xx, uu, ll, gg, HH
 end
